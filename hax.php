@@ -1,23 +1,21 @@
 <?php
 header("Content-type: text/javascript");
 
-//$arr = file_get_contents("https://hax.co.id/server");
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://hax.co.id/server");
 curl_setopt($ch, CURLOPT_HEADER, FALSE);
 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727;https://hax.co.id/server)');
-//curl_setopt($ch, CURLOPT_NOBODY, TRUE); // remove body
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $head = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
-//echo $head;
+
 
 file_put_contents("./data.txt",$head);
 
 function getLine($file, $line, $length = 40960){
-    $returnTxt = null; // 初始化返回
-    $i = 1; // 行数
+    $returnTxt = null;
+    $i = 1;
  
     $handle = @fopen($file, "r");
     if ($handle) {
