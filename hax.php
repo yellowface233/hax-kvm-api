@@ -1,5 +1,5 @@
 <?php
-header("Content-type: text/javascript"); //已知BUG MIME类型错误 不影响使用 知道JSON的MIME类型的 可以改掉并且提交pr，感谢
+header("Content-type: application/json");
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://hax.co.id/server");
