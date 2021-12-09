@@ -1,6 +1,6 @@
 <?php
 header("Content-type: application/json");
-
+$version = "1.2"; // 每次commit请将此数字增加0.1，用于显示版本号
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://hax.co.id/server");
 curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -59,6 +59,6 @@ $e2 = preg_replace('<</h1>>', '', $e1);
 $e3 = preg_replace('< VPS>', '', $e2);
 $e4 = preg_replace('/\n/', '',$e3 );
 
-echo '{"eu1":"'.$a4.'","eu2":"'.$b4.'","eu3":"'.$c4.'","eu4":"'.$d4.'","eu5":"'.$e4.'"}';
+echo '{"eu1":"'.$a4.'","eu2":"'.$b4.'","eu3":"'.$c4.'","eu4":"'.$d4.'","eu5":"'.$e4.'","version":'.$version.'}';
 unlink("./data.txt");
 ?>
