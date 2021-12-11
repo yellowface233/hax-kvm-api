@@ -71,7 +71,7 @@ $e3 = preg_replace('< VPS>', '', $e2);
 $e4 = preg_replace('/\n/', '',$e3 );
 //eu-mid-1
 $midtext = '<option value="EU Middle Specs">EU Middle Specs (KVM + SSD)</option>';
-if(substr($create,$midtext)){
+if(strpos($create,$midtext)){
     $mid1 = "true";
 }else{
     $mid1="false";
