@@ -9,4 +9,8 @@
 也可以自己试试，应该都可以直接使用
 
 # Demo
-http://omjj.tools/hax.php
+http://omjj.tools/hax.php(1.0)
+
+# TG通知bot须知
+通知bot请修改频道id和bot的token。
+将其部署到网站的一个角落，添加定时任务每十分钟访问一次即可
