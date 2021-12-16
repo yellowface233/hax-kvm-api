@@ -1,6 +1,6 @@
 <?php
 header("Content-type: application/json");
-$version = "1.5"; // 每次commit请将此数字增加[大改0.2小改0.1]，用于显示版本号
+$version = "1.6"; // 每次commit请将此数字增加[大改0.2小改0.1]，用于显示版本号
 
 // 获取server页面（eu1-10）
 $ch = curl_init();
@@ -39,19 +39,19 @@ function getLine($file, $line, $length = 40960){
     }
     return $returnTxt;
 }
-$a = getLine("data.txt",104,40960);
-$b = getLine("data.txt",112,40960);
-$c = getLine("data.txt",120,40960);
-$d = getLine("data.txt",128,40960);
-$e = getLine("data.txt",136,40960);
+$a = getLine("data.txt",103,40960);
+$b = getLine("data.txt",111,40960);
+$c = getLine("data.txt",119,40960);
+$d = getLine("data.txt",127,40960);
+$e = getLine("data.txt",135,40960);
 
 // 妈的hax站长可真勤劳 一下子加5个DC
 // 直接在源码吐槽了
-$f = getLine("data.txt",148,40960);
-$g = getLine("data.txt",156,40960);
-$h = getLine("data.txt",164,40960);
-$i = getLine("data.txt",172,40960);
-$j = getLine("data.txt",180,40960);
+$f = getLine("data.txt",147,40960);
+$g = getLine("data.txt",155,40960);
+$h = getLine("data.txt",163,40960);
+$i = getLine("data.txt",171,40960);
+$j = getLine("data.txt",179,40960);
 
 //eu1
 $a1 = preg_replace('<<h1 class="card-text">>', '', $a);
