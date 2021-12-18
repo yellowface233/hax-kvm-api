@@ -1,5 +1,5 @@
 <?php
-$bot_api_key = '修改成Bot的token';
+$bot_api_key = '修改成bot的Token';
 function send_get($urlstring){
  $ch = curl_init();
  curl_setopt($ch, CURLOPT_URL, $urlstring);
@@ -10,7 +10,7 @@ function send_get($urlstring){
  curl_close($ch); return $result;
 }
 
-$tgid = "频道的ID 带-号";
+$tgid = "频道ID";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://hax.co.id/data-center/");
@@ -50,6 +50,8 @@ $g = getLine("data.txt",155,40960);
 $h = getLine("data.txt",163,40960);
 $i = getLine("data.txt",171,40960);
 $j = getLine("data.txt",179,40960);
+$k = getLine("data.txt",191,40960);
+$l = getLine("data.txt",235,40960);// 在线VPS总数
 
 //eu1
 $a1 = preg_replace('<<h1 class="card-text">>', '', $a);
@@ -102,30 +104,60 @@ $j2 = preg_replace('<</h1>>', '', $j1);
 $j3 = preg_replace('< VPS>', '', $j2);
 $j4 = preg_replace('/\n/', '',$j3 );
 //eu-mid-1
-$midtext = '<option value="EU Middle Specs">EU Middle Specs (KVM + SSD)</option>';
+$k1 = preg_replace('<<h1 class="card-text">>', '', $k);
+$k2 = preg_replace('<</h1>>', '', $k1);
+$k3 = preg_replace('< VPS>', '', $k2);
+$k4 = preg_replace('/\n/', '',$k3 );
+//AllVPS
+$l1 = preg_replace('<<h1 class="card-text">>', '', $l);
+$l2 = preg_replace('<</h1>>', '', $l1);
+$l3 = preg_replace('< VPS>', '', $l2);
+$l4 = preg_replace('/\n/', '',$l3 );
 
-// 获取开通页面（eu-mid1）
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://hax.co.id/create-vps");
-curl_setopt($ch, CURLOPT_HEADER, FALSE);
-curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727;https://hax.co.id/server)');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-$create = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-if(strpos($create,$midtext)){
-    $mid1 = "可开通";
-}else{
-    $mid1="不可开通";
-}
+// OpenVZ 太多了，单独来一块（总和） 草 hax站长真的不能再勤劳了
+// OpenVZ五个DC单独（取行数）
+$ovz1 = getLine("data.txt",199,40960);
+$ovz2 = getLine("data.txt",206,40960);
+$ovz3 = getLine("data.txt",213,40960);
+$ovz4 = getLine("data.txt",220,40960);
+$ovz5 = getLine("data.txt",227,40960);
+// 获取数量 五个OVZ
+//ovz1
+$ovz1 = preg_replace('<<h1 class="card-text">>', '', $ovz1);
+$ovz1 = preg_replace('<</h1>>', '', $ovz1);
+$ovz1 = preg_replace('< VPS>', '', $ovz1);
+$ovz1 = preg_replace('/\n/', '',$ovz1);
+//ovz2
+$ovz2 = preg_replace('<<h1 class="card-text">>', '', $ovz2);
+$ovz2 = preg_replace('<</h1>>', '', $ovz2);
+$ovz2 = preg_replace('< VPS>', '', $ovz2);
+$ovz2 = preg_replace('/\n/', '',$ovz2);
+//ovz3
+$ovz3 = preg_replace('<<h1 class="card-text">>', '', $ovz3);
+$ovz3 = preg_replace('<</h1>>', '', $ovz3);
+$ovz3 = preg_replace('< VPS>', '', $ovz3);
+$ovz3 = preg_replace('/\n/', '',$ovz3);
+//ovz4
+$ovz4 = preg_replace('<<h1 class="card-text">>', '', $ovz4);
+$ovz4 = preg_replace('<</h1>>', '', $ovz4);
+$ovz4 = preg_replace('< VPS>', '', $ovz4);
+$ovz4 = preg_replace('/\n/', '',$ovz4);
+//ovz5
+$ovz5 = preg_replace('<<h1 class="card-text">>', '', $ovz5);
+$ovz5 = preg_replace('<</h1>>', '', $ovz5);
+$ovz5 = preg_replace('< VPS>', '', $ovz5);
+$ovz5 = preg_replace('/\n/', '',$ovz5);
+// 求OpenVZ总和
+$ovz = $ovz1+$ovz2+$ovz3+$ovz4+$ovz5;
+// OpenVZ结束
+$version = "0.0";
 
-$js = '{"eu1":"'.$a4.'","eu2":"'.$b4.'","eu3":"'.$c4.'","eu4":"'.$d4.'","eu5":"'.$e4.'","eu6":"'.$f4.'","eu7":"'.$g4.'","eu8":"'.$h4.'","eu9":"'.$i4.'","eu10":"'.$j4.'","eu-mid-1":'.$mid1.',"version":"0"}';
+$js = '{"eu1":"'.$a4.'","eu2":"'.$b4.'","eu3":"'.$c4.'","eu4":"'.$d4.'","eu5":"'.$e4.'","eu6":"'.$f4.'","eu7":"'.$g4.'","eu8":"'.$h4.'","eu9":"'.$i4.'","eu10":"'.$j4.'","eu-mid-1":"'.$k4.'","OpenVZ":"'.$ovz.'","AllVPS":"'.$l4.'","version":"'.$version.'"}';
 unlink("./data.txt");
 $kc = json_decode($js , true);
 
-$text = '最新HaxKvm区库存信息:%0AEU1: '.$a4.'%0AEU2: '.$b4.'%0AEU3: '.$c4.'%0AEU4: '.$d4.'%0AEU5: '.$e4.'%0AEU6: '.$f4.'%0AEU7: '.$g4.'%0AEU8: '.$h4.'%0AEU9: '.$i4.'%0AEU10: '.$j4.'%0AEU-MID1:'.$mid1.'%0AHax网站:https://hax.co.id/%0AAPI:https://github.com/yellowface233/hax-kvm-api%0A(数据为已开通数量)';
-
- $url = "https://api.telegram.org/bot$bot_api_key/sendMessage?chat_id=$tgid&text=$text";
+$text = '测试消息:%0A最新HaxKvm区库存信息:%0AEU1: '.$a4.'%0AEU2: '.$b4.'%0AEU3: '.$c4.'%0AEU4: '.$d4.'%0AEU5: '.$e4.'%0AEU6: '.$f4.'%0AEU7: '.$g4.'%0AEU8: '.$h4.'%0AEU9: '.$i4.'%0AEU10: '.$j4.'%0AEU-MID1:'.$k4.'%0AOpenVZ: '.$ovz.'%0A全部VPS: '.$l4.'%0AHax网站:https://hax.co.id/%0AAPI:https://github.com/yellowface233/hax-kvm-api%0A(数据为已开通数量)';
+$url = "https://api.telegram.org/bot$bot_api_key/sendMessage?chat_id=$tgid&text=$text";
 
 echo send_get($url);
 ?>
