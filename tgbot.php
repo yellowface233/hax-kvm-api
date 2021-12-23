@@ -1,4 +1,5 @@
 <?php
+//无人使用，暂停更新此文件，真有需要请联系我 tg@yellowface233
 $bot_api_key = '修改成bot的Token';
 function send_get($urlstring){
  $ch = curl_init();
