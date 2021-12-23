@@ -1,6 +1,6 @@
 <?php
 header("Content-type: application/json");
-$version = "1.8"; // 每次commit请将此数字增加[大改0.2小改0.1]，用于显示版本号
+$version = "1.9"; // 每次commit请将此数字增加[大改0.2小改0.1]，用于显示版本号
 
 // 获取server页面
 $ch = curl_init();
@@ -29,21 +29,22 @@ function getLine($file, $line, $length = 40960){
     }
     return $returnTxt;
 }
-$a = getLine("data.txt",103,40960);
-$b = getLine("data.txt",111,40960);
-$c = getLine("data.txt",119,40960);
-$d = getLine("data.txt",127,40960);
-$e = getLine("data.txt",135,40960);
+$a = getLine("data.txt",104,40960); //eu1
+$b = getLine("data.txt",112,40960);//2
+$c = getLine("data.txt",120,40960);//3
+$d = getLine("data.txt",128,40960);//4
+$e = getLine("data.txt",136,40960);//5
 
 // 妈的hax站长可真勤劳 一下子加5个DC
 // 直接在源码吐槽了
-$f = getLine("data.txt",147,40960);
-$g = getLine("data.txt",155,40960);
-$h = getLine("data.txt",163,40960);
-$i = getLine("data.txt",171,40960);
-$j = getLine("data.txt",179,40960);
-$k = getLine("data.txt",191,40960);
-$l = getLine("data.txt",235,40960);// 在线VPS总数
+$f = getLine("data.txt",148,40960);//6
+$g = getLine("data.txt",156,40960);//7
+$h = getLine("data.txt",164,40960);//8
+$i = getLine("data.txt",172,40960);//9
+$j = getLine("data.txt",180,40960);//10
+$k = getLine("data.txt",192,40960);//mid
+$id = getLine("data.txt",201,40960);//id-1
+$l = getLine("data.txt",245,40960);// 在线VPS总数
 
 //eu1
 $a1 = preg_replace('<<h1 class="card-text">>', '', $a);
@@ -105,14 +106,19 @@ $l1 = preg_replace('<<h1 class="card-text">>', '', $l);
 $l2 = preg_replace('<</h1>>', '', $l1);
 $l3 = preg_replace('< VPS>', '', $l2);
 $l4 = preg_replace('/\n/', '',$l3 );
+//id-1
+$id = preg_replace('<<h1 class="card-text">>', '', $id);
+$id = preg_replace('<</h1>>', '', $id);
+$id = preg_replace('< VPS>', '', $id);
+$id = preg_replace('/\n/', '',$id );
 
 // OpenVZ 太多了，单独来一块（总和） 草 hax站长真的不能再勤劳了
 // OpenVZ五个DC单独（取行数）
-$ovz1 = getLine("data.txt",199,40960);
-$ovz2 = getLine("data.txt",206,40960);
-$ovz3 = getLine("data.txt",213,40960);
-$ovz4 = getLine("data.txt",220,40960);
-$ovz5 = getLine("data.txt",227,40960);
+$ovz1 = getLine("data.txt",209,40960);
+$ovz2 = getLine("data.txt",216,40960);
+$ovz3 = getLine("data.txt",223,40960);
+$ovz4 = getLine("data.txt",230,40960);
+$ovz5 = getLine("data.txt",237,40960);
 // 获取数量 五个OVZ
 //ovz1
 $ovz1 = preg_replace('<<h1 class="card-text">>', '', $ovz1);
@@ -143,6 +149,6 @@ $ovz5 = preg_replace('/\n/', '',$ovz5);
 $ovz = $ovz1+$ovz2+$ovz3+$ovz4+$ovz5;
 // OpenVZ结束
 
-echo '{"eu1":"'.$a4.'","eu2":"'.$b4.'","eu3":"'.$c4.'","eu4":"'.$d4.'","eu5":"'.$e4.'","eu6":"'.$f4.'","eu7":"'.$g4.'","eu8":"'.$h4.'","eu9":"'.$i4.'","eu10":"'.$j4.'","eu-mid-1":"'.$k4.'","OpenVZ":"'.$ovz.'","AllVPS":"'.$l4.'","version":"'.$version.'"}';
+echo '{"eu1":"'.$a4.'","eu2":"'.$b4.'","eu3":"'.$c4.'","eu4":"'.$d4.'","eu5":"'.$e4.'","eu6":"'.$f4.'","eu7":"'.$g4.'","eu8":"'.$h4.'","eu9":"'.$i4.'","eu10":"'.$j4.'","eu-mid-1":"'.$k4.'","id1":"'.$id.'","OpenVZ":"'.$ovz.'","AllVPS":"'.$l4.'","version":"'.$version.'"}';
 unlink("./data.txt");
 ?>
