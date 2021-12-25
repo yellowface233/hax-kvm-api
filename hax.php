@@ -1,6 +1,6 @@
 <?php
 header("Content-type: application/json");
-$version = "1.9"; // 每次commit请将此数字增加[大改0.2小改0.1]，用于显示版本号
+$version = "2.0"; // 每次commit请将此数字增加[大改0.2小改0.1]，用于显示版本号
 
 // 获取server页面
 $ch = curl_init();
@@ -43,8 +43,9 @@ $h = getLine("data.txt",164,40960);//8
 $i = getLine("data.txt",172,40960);//9
 $j = getLine("data.txt",180,40960);//10
 $k = getLine("data.txt",192,40960);//mid
-$id = getLine("data.txt",201,40960);//id-1
-$l = getLine("data.txt",245,40960);// 在线VPS总数
+$id = getLine("data.txt",200,40960);//id-1
+$us = getLine("data.txt",207,40960);//usla
+$l = getLine("data.txt",250,40960);// 在线VPS总数
 
 //eu1
 $a1 = preg_replace('<<h1 class="card-text">>', '', $a);
@@ -111,14 +112,18 @@ $id = preg_replace('<<h1 class="card-text">>', '', $id);
 $id = preg_replace('<</h1>>', '', $id);
 $id = preg_replace('< VPS>', '', $id);
 $id = preg_replace('/\n/', '',$id );
-
+//us-1
+$us = preg_replace('<<h1 class="card-text">>', '', $us);
+$us = preg_replace('<</h1>>', '', $us);
+$us = preg_replace('< VPS>', '', $us);
+$us = preg_replace('/\n/', '',$us );
 // OpenVZ 太多了，单独来一块（总和） 草 hax站长真的不能再勤劳了
 // OpenVZ五个DC单独（取行数）
-$ovz1 = getLine("data.txt",209,40960);
-$ovz2 = getLine("data.txt",216,40960);
-$ovz3 = getLine("data.txt",223,40960);
-$ovz4 = getLine("data.txt",230,40960);
-$ovz5 = getLine("data.txt",237,40960);
+$ovz1 = getLine("data.txt",214,40960);
+$ovz2 = getLine("data.txt",221,40960);
+$ovz3 = getLine("data.txt",228,40960);
+$ovz4 = getLine("data.txt",235,40960);
+$ovz5 = getLine("data.txt",242,40960);
 // 获取数量 五个OVZ
 //ovz1
 $ovz1 = preg_replace('<<h1 class="card-text">>', '', $ovz1);
@@ -149,6 +154,6 @@ $ovz5 = preg_replace('/\n/', '',$ovz5);
 $ovz = $ovz1+$ovz2+$ovz3+$ovz4+$ovz5;
 // OpenVZ结束
 
-echo '{"eu1":"'.$a4.'","eu2":"'.$b4.'","eu3":"'.$c4.'","eu4":"'.$d4.'","eu5":"'.$e4.'","eu6":"'.$f4.'","eu7":"'.$g4.'","eu8":"'.$h4.'","eu9":"'.$i4.'","eu10":"'.$j4.'","eu-mid-1":"'.$k4.'","id1":"'.$id.'","OpenVZ":"'.$ovz.'","AllVPS":"'.$l4.'","version":"'.$version.'"}';
+echo '{"eu1":"'.$a4.'","eu2":"'.$b4.'","eu3":"'.$c4.'","eu4":"'.$d4.'","eu5":"'.$e4.'","eu6":"'.$f4.'","eu7":"'.$g4.'","eu8":"'.$h4.'","eu9":"'.$i4.'","eu10":"'.$j4.'","eu-mid-1":"'.$k4.'","id1":"'.$id.'","us1":"'.$us.'","OpenVZ":"'.$ovz.'","AllVPS":"'.$l4.'","version":"'.$version.'"}';
 unlink("./data.txt");
 ?>
